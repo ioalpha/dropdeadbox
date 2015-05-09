@@ -47,7 +47,16 @@
 		           img.src = e.target.result;
 		        };       
 		        FR.readAsDataURL( this.files[0] );
+				sacrifice();
 		    }
+		}
+		
+		function sacrifice() {
+		  $("#prey").animate({
+		    top: 600,
+		  }, 5000, function() {
+		    // Animation complete.
+		  });
 		}
 		
 
