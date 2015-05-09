@@ -20,10 +20,8 @@
 	<canvas id="canvas"  width="900" height="600">
 	   Browser missing HTML5 support.
 	</canvas>
-	
-	<input type="button" onclick="alert('Sacrificing...')" value="sacrifice now">
-	
-	<button onClick="greyscale()">sacrifice now</button>
+		
+	<button onClick="Filter.greyscale()">sacrifice now</button>
 	
 	<script type="text/javascript">	
 	
@@ -31,6 +29,7 @@
 		return document.getElementById(id);
 	} // Get elem by ID
 
+	var w = 900, h = 600;
 	var canvas = document.getElementById("canvas");
 	var context = canvas.getContext("2d");
 
@@ -53,17 +52,8 @@
 	
 	Filters = {};
 	Filters.getPixels = function(img) {
-	  var c = this.getCanvas(img.width, img.height);
-	  var ctx = c.getContext('2d');
-	  ctx.drawImage(img);
-	  return ctx.getImageData(0,0,c.width,c.height);
-	};
-
-	Filters.getCanvas = function(w,h) {
-	  var c = document.createElement('canvas');
-	  c.width = w;
-	  c.height = h;
-	  return c;
+	  context.drawImage(img);
+	  return context.getImageData(0, 0, canvas.width, canvas.height);
 	};
 	
 	Filters.filterImage = function(filter, image, var_args) {
