@@ -64,7 +64,8 @@ FONTS
 
 
 html {
-    height:100%;
+    width: 100%;
+    height: 100%;    
     font-size: 62.5%; /* definiert 1rem als 10px */
     margin: 0;
     padding: 0;
@@ -72,11 +73,14 @@ html {
 }
 
 body {
+    width: 100%;
+    height: 100%;
     margin: 0;
     padding: 0;
     background: url('../img/volcano.gif');
     background-size: cover;
     background-repeat: no-repeat;
+    background-position: center bottom;
 }
 
 h1 {
@@ -91,4 +95,18 @@ h1 {
 #pray {
 	position: absolute;
 	top: -600px;
+}
+
+#balken {
+    width: 100%;
+    height: 200px;
+    background: url('../img/volcano.gif');
+    /*background: lime;
+    */
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: fixed;
+    bottom: 0;
+    z-index: 10;
+    background-position: center bottom;
 }
