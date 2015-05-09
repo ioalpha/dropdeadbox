@@ -36,13 +36,16 @@
 		var canvas = document.getElementById("canvas");
 		var context = canvas.getContext("2d");
 		
-		function centerPrey() {
+		function centerCanvas() {
 			var docWidth = document.body.clientWidth;
 			var left = Math.round((docWidth - w) / 2);
 			$("#prey").css("left", left);
 		}
 		
-		centerPrey();
+		centerCanvas();
+		
+		var ligeti = new Audio("audio/ligeti.mp3");
+		var noise = new Audio("audio/noise.mp3");
 		
 		function el(id) {
 			return document.getElementById(id);
@@ -64,14 +67,16 @@
 		}
 		
 		function sacrifice() {
-		  $("#prey").animate({
-		    top: 600,
-		  }, 25000, function() {
-		    reset();
-		  });
+			ligeti.play();
+			$("#prey").animate({
+				top: 600,
+			}, 25000, function() {
+				reset();
+			});
 		}
 		
 		function reset() {
+			ligeti.pause();
 			$("#prey").css("top", "-600px");
 			context.clearRect(0, 0, canvas.width, canvas.height);
 		}
