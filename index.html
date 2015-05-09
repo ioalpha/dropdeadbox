@@ -28,21 +28,30 @@
 	</div>
 		
 	<script type="text/javascript">	
-		var w = 900, h = 600;
+		var w = 900
+		var h = 600;
 		var canvas = document.getElementById("canvas");
 		var context = canvas.getContext("2d");
+		
+		function centerPrey() {
+			var docWidth = document.body.clientWidth;
+			var left = Math.round((docWidth - w) / 2);
+			$("#prey").css("left", left);
+		}
+		
+		centerPrey();
 		
 		function el(id) {
 			return document.getElementById(id);
 		} // Get elem by ID
 
 		function readImage() {
-		    if ( this.files && this.files[0] ) {
-		        var FR = new FileReader();
-		        FR.onload = function(e) {
-		           var img = new Image();
-		           img.onload = function() {
-		             context.drawImage(img, 0, 0);
+			if ( this.files && this.files[0] ) {
+				var FR = new FileReader();
+				FR.onload = function(e) {
+					var img = new Image();
+					img.onload = function() {
+		             context.drawImage(img, Math.round((w - img.width) / 2),  0);
 		           };
 		           img.src = e.target.result;
 		        };       
@@ -55,8 +64,13 @@
 		  $("#prey").animate({
 		    top: 600,
 		  }, 5000, function() {
-		    // Animation complete.
+		    reset();
 		  });
+		}
+		
+		function reset() {
+			$("#prey").css("top", "-600px");
+			context.clearRect(0, 0, canvas.width, canvas.height);
 		}
 		
 
