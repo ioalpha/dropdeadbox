@@ -87,3 +87,8 @@ h1 {
     line-height: 1;
     margin: 0;
 }
+
+#prey {
+	position: absolute;
+	top: -600px;
+}
