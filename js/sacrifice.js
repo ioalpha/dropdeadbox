@@ -1,10 +1,8 @@
+var pixels;
+
 function el(id) {
 	return document.getElementById(id);
 } // Get elem by ID
-
-var w = 900, h = 600;
-var canvas = document.getElementById("canvas");
-var context = canvas.getContext("2d");
 
 function readImage() {
     if ( this.files && this.files[0] ) {
@@ -13,6 +11,8 @@ function readImage() {
            var img = new Image();
            img.onload = function() {
              context.drawImage(img, 0, 0);
+			pixels = context.getImageData(0, 0, canvas.width, canvas.height);
+			//alert(pixels);
            };
            img.src = e.target.result;
         };       
@@ -20,25 +20,17 @@ function readImage() {
     }
 }
 
-el("fileUpload").addEventListener("change", readImage, false);
-
-
-Filters = {};
-
-Filters.getPixels = function(img) {
-  context.drawImage(img);
-  return context.getImageData(0, 0, canvas.width, canvas.height);
-};
-
-Filters.filterImage = function(filter, image, var_args) {
-  var args = [this.getPixels(image)];
-  for (var i=2; i<arguments.length; i++) {
-    args.push(arguments[i]);
+filterImage = function(filter, image, var_args) {
+  for (var i = 2; i < arguments.length; i++) {
+    pixels.push(arguments[i]);
   }
-  return filter.apply(null, args);
+  return filter.apply(null, pixels);
 };
 
-Filters.grayscale = function(pixels, args) {
+
+
+
+grayscale = function() {
   var d = pixels.data;
   for (var i=0; i<d.length; i+=4) {
     var r = d[i];
